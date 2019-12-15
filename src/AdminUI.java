@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 public class AdminUI {
     public JFrame view;
 
-    public JButton btnSystemConf = new JButton("System Configuration");
     public JButton btnAddUser = new JButton("Add User");
     public JButton btnUpdate = new JButton("Change Password");
 
@@ -25,21 +24,11 @@ public class AdminUI {
         view.getContentPane().add(title);
 
         JPanel panelButtons = new JPanel(new FlowLayout());
-        panelButtons.add(btnSystemConf);
         panelButtons.add(btnAddUser);
         panelButtons.add(btnUpdate);
 
         view.getContentPane().add(panelButtons);
-
-
-        btnSystemConf.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                //ManageProductUI ui = new ManageProductUI();
-                //ui.run();
-            }
-        });
-
+        
         btnAddUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
