@@ -83,6 +83,7 @@ public class StoreServer {
                         msg.code = MessageModel.OPERATION_FAILED;
                     }
                     out.println(gson.toJson(msg));  // answer login command!
+                    break;
                 }
 
                 if (msg.code == MessageModel.GET_PURCHASE_LIST) {

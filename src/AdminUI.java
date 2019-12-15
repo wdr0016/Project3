@@ -43,8 +43,8 @@ public class AdminUI {
         btnAddUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //ManageCustomerUI ui = new ManageCustomerUI();
-                //ui.run();
+                AddUser ui = new AddUser();
+                ui.run();
             }
         });
 

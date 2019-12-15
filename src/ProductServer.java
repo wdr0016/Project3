@@ -259,6 +259,41 @@ public class ProductServer {
 
                 }
 
+                if (command.equals("PUTUSER")) {
+                    String username = in.nextLine();
+                    String password = in.nextLine();
+                    String fullname = in.nextLine();
+                    String type = in.nextLine();
+
+                    System.out.println("PUT command with Username = " + username);
+
+                    Connection conn = null;
+                    try {
+                        String url = "jdbc:sqlite:" + dbfile;
+                        conn = DriverManager.getConnection(url);
+
+                        String sql = "SELECT * FROM Users WHERE Username = " + username;
+                        Statement stmt = conn.createStatement();
+                        /*ResultSet rs = stmt.executeQuery(sql);
+
+                        if (rs.next()) {
+                            rs.close();
+                            stmt.execute("DELETE FROM Users WHERE Username = " + username);
+                        }*/
+
+                        sql = "INSERT INTO Users VALUES (\"" + username + "\",\"" + password + "\", \""
+                                + fullname + "\", " + type + ")";
+                        System.out.println("SQL for PUT: " + sql);
+                        stmt.execute(sql);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    conn.close();
+
+
+                }
+
                 else {
                     out.println(0); // logout unsuccessful!
                 }

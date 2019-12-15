@@ -34,5 +34,5 @@ public interface IDataAdapter {
     public ProductListModel searchProduct(String name, double minPrice, double maxPrice);
 
     public UserModel loadUser(String username);
-    //public int saveUser(UserModel user);
+    public int saveUser(UserModel user);
 }

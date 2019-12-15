@@ -238,4 +238,24 @@ public class SQLiteDataAdapter implements IDataAdapter {
         return customer;
     }
 
+    public int saveUser(UserModel user) {
+        try {
+            Socket link = new Socket("localhost", 1001);
+            Scanner input = new Scanner(link.getInputStream());
+            PrintWriter output = new PrintWriter(link.getOutputStream(), true);
+
+            output.println("PUTUSER");
+            output.println(user.mUsername);
+            output.println(user.mPassword);
+            output.println(user.mFullname);
+            output.println(user.mUserType);
+
+            return CUSTOMER_SAVED_OK;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CUSTOMER_DUPLICATE_ERROR;
+        }
+    }
+
 }
