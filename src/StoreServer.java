@@ -28,7 +28,6 @@ public class StoreServer {
         try {
             SQLiteDataAdapter adapter = new SQLiteDataAdapter();
             Gson gson = new Gson();
-            adapter.connect(dbfile);
 
             ServerSocket server = new ServerSocket(port);
 
@@ -42,6 +41,7 @@ public class StoreServer {
                 MessageModel msg = gson.fromJson(in.nextLine(), MessageModel.class);
 
                 if (msg.code == MessageModel.GET_PRODUCT) {
+                    adapter.connect(dbfile);
                     System.out.println("GET product with id = " + msg.data);
                     ProductModel p = adapter.loadProduct(Integer.parseInt(msg.data));
                     if (p == null) {
@@ -52,9 +52,11 @@ public class StoreServer {
                         msg.data = gson.toJson(p);
                     }
                     out.println(gson.toJson(msg));
+                    adapter.disconnect();
                 }
 
                 if (msg.code == MessageModel.PUT_PRODUCT) {
+                    adapter.connect(dbfile);
                     ProductModel p = gson.fromJson(msg.data, ProductModel.class);
                     System.out.println("PUT command with Product = " + p);
                     int res = adapter.saveProduct(p);
@@ -65,9 +67,11 @@ public class StoreServer {
                         msg.code = MessageModel.OPERATION_FAILED;
                     }
                     out.println(gson.toJson(msg));
+                    adapter.disconnect();
                 }
 
                 if (msg.code == MessageModel.LOGIN) {
+                    adapter.connect(dbfile);
                     UserModel u = gson.fromJson(msg.data, UserModel.class);
                     System.out.println("LOGIN command with User = " + u);
                     UserModel user = adapter.loadUser(u.mUsername);
@@ -83,27 +87,29 @@ public class StoreServer {
                         msg.code = MessageModel.OPERATION_FAILED;
                     }
                     out.println(gson.toJson(msg));  // answer login command!
-                    break;
+                    adapter.disconnect();
                 }
 
                 if (msg.code == MessageModel.GET_PURCHASE_LIST) {
+                    adapter.connect(dbfile);
                     int id = Integer.parseInt(msg.data);
                     PurchaseListModel res = adapter.loadPurchaseHistory(id);
                     msg.code = MessageModel.OPERATION_OK;
                     msg.data = gson.toJson(res);
                     out.println(gson.toJson(msg));  // answer get purchase history!!!
+                    adapter.disconnect();
                 }
 
                 if (msg.code == MessageModel.SEARCH_PRODUCT) {
+                    adapter.connect(dbfile);
                     String name = "Apple";
                     double min = 0, max = 10000;
                     ProductListModel res = adapter.searchProduct(name, min, max);
                     msg.code = MessageModel.OPERATION_OK;
                     msg.data = gson.toJson(res);
                     out.println(gson.toJson(msg));  // answer get purchase history!!!
+                    adapter.disconnect();
                 }
-
-
                 // add responding to GET_USER, PUT_USER,...
             }
 
