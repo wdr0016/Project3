@@ -10,7 +10,6 @@ public class CustomerUI {
     public JFrame view;
 
     public JButton btnMakePurchase = new JButton("Make a Purchase");
-    public JButton btnCancelPurchase = new JButton("Cancel a Purchase");
     public JButton btnViewPurchases = new JButton("View Purchase History");
     public JButton btnSeachProduct = new JButton("Search Product");
 
@@ -39,7 +38,6 @@ public class CustomerUI {
         JPanel panelButtons = new JPanel(new FlowLayout());
         panelButtons.add(btnMakePurchase);
         panelButtons.add(btnViewPurchases);
-        panelButtons.add(btnCancelPurchase);
         panelButtons.add(btnSeachProduct);
 
         view.getContentPane().add(panelButtons);
@@ -56,7 +54,7 @@ public class CustomerUI {
         btnMakePurchase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ManageCustomerUI ui = new ManageCustomerUI();
+                AddPurchaseUI ui = new AddPurchaseUI();
                 ui.run();
             }
         });
