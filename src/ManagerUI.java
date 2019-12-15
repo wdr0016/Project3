@@ -7,8 +7,9 @@ import java.awt.event.ActionListener;
 public class ManagerUI {
     public JFrame view;
 
-    public JButton btnManageCustomer = new JButton("Manage Customers");
-    public JButton btnManageProduct = new JButton("Manage Products");
+    public JButton btnManageCustomer = new JButton("Summary of Sales");
+    public JButton btnManageProduct = new JButton("Add Products");
+    public JButton btnUpdateProduct = new JButton("Update Products");
 
     public ManagerUI() {
         this.view = new JFrame();
@@ -25,6 +26,7 @@ public class ManagerUI {
 
         JPanel panelButtons = new JPanel(new FlowLayout());
         panelButtons.add(btnManageProduct);
+        panelButtons.add(btnUpdateProduct);
         panelButtons.add(btnManageCustomer);
 
         view.getContentPane().add(panelButtons);
@@ -38,11 +40,20 @@ public class ManagerUI {
             }
         });
 
+        btnUpdateProduct.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                UpdateProductUI ui = new UpdateProductUI();
+                ui.run();
+            }
+        });
+
         btnManageCustomer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ManageCustomerUI ui = new ManageCustomerUI();
-                ui.run();
+                //ManageCustomerUI ui = new ManageCustomerUI();
+                //ui.run();
+                System.out.println("TODO");
             }
         });
 

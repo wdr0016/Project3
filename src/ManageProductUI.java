@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +7,8 @@ public class ManageProductUI {
 
     public JFrame view;
 
-    public JButton btnLoad = new JButton("Load Product");
-    public JButton btnSave = new JButton("Save Product");
+    public JButton btnAdd = new JButton("Add");
+    public JButton btnCancel = new JButton("Cancel");
 
     public JTextField txtProductID = new JTextField(20);
     public JTextField txtName = new JTextField(20);
@@ -17,19 +16,14 @@ public class ManageProductUI {
     public JTextField txtQuantity = new JTextField(20);
 
 
-    public ManageProductUI() {
+    public ManageProductUI()   {
         this.view = new JFrame();
 
         view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        view.setTitle("Update Product Information");
+        view.setTitle("Add Product");
         view.setSize(600, 400);
         view.getContentPane().setLayout(new BoxLayout(view.getContentPane(), BoxLayout.PAGE_AXIS));
-
-        JPanel panelButtons = new JPanel(new FlowLayout());
-        panelButtons.add(btnLoad);
-        panelButtons.add(btnSave);
-        view.getContentPane().add(panelButtons);
 
         JPanel line1 = new JPanel(new FlowLayout());
         line1.add(new JLabel("ProductID "));
@@ -51,10 +45,19 @@ public class ManageProductUI {
         line4.add(txtQuantity);
         view.getContentPane().add(line4);
 
+        JPanel panelButtons = new JPanel(new FlowLayout());
+        panelButtons.add(btnAdd);
+        panelButtons.add(btnCancel);
+        view.getContentPane().add(panelButtons);
 
-        btnLoad.addActionListener(new LoadButtonListerner());
+        btnAdd.addActionListener(new AddButtonListerner());
 
-        btnSave.addActionListener(new SaveButtonListener());
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                view.dispose();
+            }
+        });
 
     }
 
@@ -62,43 +65,12 @@ public class ManageProductUI {
         view.setVisible(true);
     }
 
-    class LoadButtonListerner implements ActionListener {
+    class AddButtonListerner implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             ProductModel product = new ProductModel();
-            String id = txtProductID.getText();
 
-            if (id.length() == 0) {
-                JOptionPane.showMessageDialog(null, "ProductID cannot be null!");
-                return;
-            }
-
-            try {
-                product.mProductID = Integer.parseInt(id);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "ProductID is invalid!");
-                return;
-            }
-
-            // call data access!
-
-            product = StoreManager.getInstance().getDataAdapter().loadProduct(product.mProductID);
-
-            if (product == null) {
-                JOptionPane.showMessageDialog(null, "Product NOT exists!");
-            } else {
-                txtName.setText(product.mName);
-                txtPrice.setText(Double.toString(product.mPrice));
-                txtQuantity.setText(Double.toString(product.mQuantity));
-            }
-        }
-    }
-
-    class SaveButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            ProductModel product = new ProductModel();
             String id = txtProductID.getText();
 
             if (id.length() == 0) {
@@ -137,13 +109,13 @@ public class ManageProductUI {
                 return;
             }
 
-
-            int  res = StoreManager.getInstance().getDataAdapter().saveProduct(product);
-
-            if (res == IDataAdapter.PRODUCT_DUPLICATE_ERROR)
-                JOptionPane.showMessageDialog(null, "Product is NOT saved successfully!");
-            else
-                JOptionPane.showMessageDialog(null, "Product is SAVED successfully!");
+            switch (StoreManager.getInstance().getDataAdapter().saveProduct(product)) {
+                case SQLiteDataAdapter.PRODUCT_DUPLICATE_ERROR:
+                    JOptionPane.showMessageDialog(null, "Product NOT added successfully! Duplicate product ID!");
+                default:
+                    JOptionPane.showMessageDialog(null, "Product added successfully!" + product);
+            }
         }
     }
+
 }

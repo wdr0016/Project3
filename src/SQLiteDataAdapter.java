@@ -126,7 +126,7 @@ public class SQLiteDataAdapter implements IDataAdapter {
         ProductModel product = new ProductModel();
 
         try {
-            Socket link = new Socket("localhost", 1000);
+            Socket link = new Socket("localhost", 1001);
             Scanner input = new Scanner(link.getInputStream());
             PrintWriter output = new PrintWriter(link.getOutputStream(), true);
 
@@ -152,7 +152,7 @@ public class SQLiteDataAdapter implements IDataAdapter {
 
     public int saveProduct(ProductModel product) {
         try {
-            Socket link = new Socket("localhost", 1000);
+            Socket link = new Socket("localhost", 1001);
             Scanner input = new Scanner(link.getInputStream());
             PrintWriter output = new PrintWriter(link.getOutputStream(), true);
 
@@ -172,7 +172,7 @@ public class SQLiteDataAdapter implements IDataAdapter {
     @Override
     public int savePurchase(PurchaseModel purchase) {
         try {
-            Socket link = new Socket("localhost", 1000);
+            Socket link = new Socket("localhost", 1001);
             Scanner input = new Scanner(link.getInputStream());
             PrintWriter output = new PrintWriter(link.getOutputStream(), true);
 
@@ -192,7 +192,7 @@ public class SQLiteDataAdapter implements IDataAdapter {
 
     public int saveCustomer(CustomerModel customer) {
         try {
-            Socket link = new Socket("localhost", 1000);
+            Socket link = new Socket("localhost", 1001);
             Scanner input = new Scanner(link.getInputStream());
             PrintWriter output = new PrintWriter(link.getOutputStream(), true);
 
@@ -214,7 +214,7 @@ public class SQLiteDataAdapter implements IDataAdapter {
         CustomerModel customer = new CustomerModel();
 
         try {
-            Socket link = new Socket("localhost", 1000);
+            Socket link = new Socket("localhost", 1001);
             Scanner input = new Scanner(link.getInputStream());
             PrintWriter output = new PrintWriter(link.getOutputStream(), true);
 
