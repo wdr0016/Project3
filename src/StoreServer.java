@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StoreServer {
-    static String dbfile = "C:\\Users\\Willm\\Documents\\COMP3700\\store.db";
+    static String dbfile = "C:\\Users\\Willm\\Documents\\COMP3700\\Project3\\data\\store.db";
 
     public static void main(String[] args) {
 
