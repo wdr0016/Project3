@@ -28,7 +28,7 @@ public class AdminUI {
         panelButtons.add(btnUpdate);
 
         view.getContentPane().add(panelButtons);
-        
+
         btnAddUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
