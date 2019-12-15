@@ -9,7 +9,7 @@ public class AdminUI {
 
     public JButton btnSystemConf = new JButton("System Configuration");
     public JButton btnAddUser = new JButton("Add User");
-    public JButton btnDeleteUser = new JButton("Delete User");
+    public JButton btnUpdate = new JButton("Change Password");
 
     public AdminUI() {
         this.view = new JFrame();
@@ -27,7 +27,7 @@ public class AdminUI {
         JPanel panelButtons = new JPanel(new FlowLayout());
         panelButtons.add(btnSystemConf);
         panelButtons.add(btnAddUser);
-        panelButtons.add(btnDeleteUser);
+        panelButtons.add(btnUpdate);
 
         view.getContentPane().add(panelButtons);
 

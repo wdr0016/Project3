@@ -10,6 +10,7 @@ public class CashierUI {
     public JButton btnAddCustomer = new JButton("Add New Customer");
     public JButton btnUpdatePurchase = new JButton("Update Purchase");
     public JButton btnUpdateCustomer = new JButton("Update Customer");
+    public JButton btnUpdate = new JButton("Change Password");
 
     public CashierUI() {
         this.view = new JFrame();
@@ -29,6 +30,7 @@ public class CashierUI {
         panelButtons.add(btnAddCustomer);
         panelButtons.add(btnUpdatePurchase);
         panelButtons.add(btnUpdateCustomer);
+        panelButtons.add(btnUpdate);
 
         view.getContentPane().add(panelButtons);
 

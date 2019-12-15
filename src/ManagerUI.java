@@ -10,6 +10,7 @@ public class ManagerUI {
     public JButton btnManageCustomer = new JButton("Summary of Sales");
     public JButton btnManageProduct = new JButton("Add Products");
     public JButton btnUpdateProduct = new JButton("Update Products");
+    public JButton btnUpdate = new JButton("Change Password");
 
     public ManagerUI() {
         this.view = new JFrame();
@@ -28,6 +29,7 @@ public class ManagerUI {
         panelButtons.add(btnManageProduct);
         panelButtons.add(btnUpdateProduct);
         panelButtons.add(btnManageCustomer);
+        panelButtons.add(btnUpdate);
 
         view.getContentPane().add(panelButtons);
 
